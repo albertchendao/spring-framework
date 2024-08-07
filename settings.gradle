@@ -29,9 +29,10 @@ include "spring-webmvc"
 include "spring-websocket"
 include "framework-api"
 include "framework-bom"
-include "framework-docs"
+//include "framework-docs"
 include "framework-platform"
 include "integration-tests"
+include "spring-demo"
 
 rootProject.name = "spring"
 rootProject.children.each {project ->

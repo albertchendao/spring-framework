@@ -65,15 +65,15 @@ public class CheckstyleConventions {
 		noHttp.setAllowlistFile(project.file("src/nohttp/allowlist.lines"));
 		noHttp.getSource().exclude("**/test-output/**", "**/.settings/**",
 				"**/.classpath", "**/.project", "**/.gradle/**");
-		List<String> buildFolders = List.of("bin", "build", "out");
-		project.allprojects(subproject -> {
-			Path rootPath = project.getRootDir().toPath();
-			Path projectPath = rootPath.relativize(subproject.getProjectDir().toPath());
-			for (String buildFolder : buildFolders) {
-				Path innerBuildDir = projectPath.resolve(buildFolder);
-				noHttp.getSource().exclude(innerBuildDir + File.separator + "**");
-			}
-		});
+//		List<String> buildFolders = List.of("bin", "build", "out");
+//		project.allprojects(subproject -> {
+//			Path rootPath = project.getRootDir().toPath();
+//			Path projectPath = rootPath.relativize(subproject.getProjectDir().toPath());
+//			for (String buildFolder : buildFolders) {
+//				Path innerBuildDir = projectPath.resolve(buildFolder);
+//				noHttp.getSource().exclude(innerBuildDir + File.separator + "**");
+//			}
+//		});
 	}
 
 }

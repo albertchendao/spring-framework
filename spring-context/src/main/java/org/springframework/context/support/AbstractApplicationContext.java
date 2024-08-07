@@ -600,12 +600,16 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 			try {
 				// Allows post-processing of the bean factory in context subclasses.
+				// 处理自己本身扩展的 postProcessBeanFactory 方法
 				postProcessBeanFactory(beanFactory);
 
 				StartupStep beanPostProcess = this.applicationStartup.start("spring.context.beans.post-process");
 				// Invoke factory processors registered as beans in the context.
+				// 1. 调用 BeanDefinitionRegistryPostProcessor#postProcessBeanDefinitionRegistry
+				// 2. 调用 BeanFactoryPostProcessor#postProcessBeanFactory
 				invokeBeanFactoryPostProcessors(beanFactory);
 				// Register bean processors that intercept bean creation.
+				// 注册所有 BeanPostProcessor 实例到 beanFactory
 				registerBeanPostProcessors(beanFactory);
 				beanPostProcess.end();
 
@@ -622,6 +626,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons.
+				// 生成所有单例 bean
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.
@@ -967,6 +972,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		beanFactory.freezeConfiguration();
 
 		// Instantiate all remaining (non-lazy-init) singletons.
+		// 生成 bean
 		beanFactory.preInstantiateSingletons();
 	}
 
